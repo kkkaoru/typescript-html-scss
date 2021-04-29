@@ -8,7 +8,9 @@
   },
   "scripts": {
     "dev": "webpack serve",
-    "build": "webpack",
+    "build": "webpack && touch ./dist/.gitkeep",
+    "clean": "rm -fr ./dist && mkdir dist && touch ./dist/.gitkeep",
+    "rebuild": "npm run clean && npm run build",
     "analyze": "webpack --profile --json > stats.json && webpack-bundle-analyzer stats.json",
     "tsc": "tsc --noEmit"
   },
@@ -28,6 +30,8 @@
     "html-loader": "^2.1.2",
     "html-webpack-plugin": "^5.3.1",
     "mini-css-extract-plugin": "^1.5.1",
+    "posthtml": "^0.15.2",
+    "posthtml-include": "^1.7.1",
     "sass": "^1.32.12",
     "sass-loader": "^11.0.1",
     "ts-loader": "^9.1.1",

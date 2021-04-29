@@ -1,0 +1,9 @@
+.menu {
+  display: flex;
+  border: 0.1rem solid #ddd;
+  &__item {
+    & + & {
+      padding-left: 0.8rem;
+    }
+  }
+}

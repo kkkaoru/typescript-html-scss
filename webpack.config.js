@@ -21,6 +21,17 @@ module.exports = {
     contentBase: `${__dirname}/src`,
     watchContentBase: true,
   },
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        vendors: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          chunks: 'all'
+        },
+      }
+    }
+  },
   plugins: [
     new HtmlWebpackPlugin({
       template: `${__dirname}/src/pages/index.html`,
@@ -34,7 +45,6 @@ module.exports = {
     new HtmlWebpackPlugin({
       filename: 'child/grandchild/index.html',
       template: `${__dirname}/src/pages/child/grandchild/index.html`,
-      chunks: ['global'],
     }),
     new MiniCssExtractPlugin(),
   ],

@@ -1,3 +1,3 @@
 import './global.scss';
-// import '@/components/organisms/header';
-alert('Load global ts');
+import '@/components/organisms/header';
+console.log('Load global ts');

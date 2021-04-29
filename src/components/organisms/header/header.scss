@@ -1,9 +1,14 @@
 .menu {
   display: flex;
-  border: 0.1rem solid #ddd;
+  list-style: none;
+  margin: 0;
+  padding: 0;
   &__item {
+    display: grid;
+    place-items: center;
+    padding: 0.8rem 1.6rem;
     & + & {
-      padding-left: 0.8rem;
+      border-left: 0.1rem solid #ddd;
     }
   }
 }

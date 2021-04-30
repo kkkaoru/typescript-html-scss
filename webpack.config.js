@@ -1,8 +1,6 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const posthtml = require('posthtml')
-const include = require('posthtml-include')
-
+const htmlLoaderPreprocessor = require('./webpack/html-loader/preprocessor');
 /** @type import('webpack').Configuration */
 module.exports = {
   mode: process.env.NODE_ENV === 'production' ? 'production': 'development',
@@ -77,24 +75,7 @@ module.exports = {
         use: {
           loader: 'html-loader',
           options: {
-            preprocessor:(content, loaderContext) =>{
-              const includeSrcPattern = /(?<=\<include\s*src=\").*(?=\")/g;
-              const htmlTrimmedPrefixSigns = content.replace(includeSrcPattern, (replacement)=> replacement.replace(/^(~|@)\//, ''));
-              // Can be reactivity when hot reload
-              const includeFiles = content.match(htmlTrimmedPrefixSigns);
-              if (includeFiles !== null) {
-                [...new Set(includeFiles)].forEach((includedFileName)=>{
-                  // https://webpack.js.org/api/loaders/#thisadddependency
-                  loaderContext.dependency(`${__dirname}/src/${includedFileName}`);
-                });
-              }
-              try {
-                return posthtml([include({ encoding: 'utf8', root: './src' })]).process(htmlTrimmedPrefixSigns, {sync: true,}).html;
-              } catch(error){
-                loaderContext.emitError(error);
-                return content;
-              }
-            }
+            preprocessor: htmlLoaderPreprocessor,
           }
         },
       },

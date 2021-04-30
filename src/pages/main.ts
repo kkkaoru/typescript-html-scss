@@ -1,4 +1,3 @@
-import './main.scss';
-import '@/components/atoms/message';
+import '@/components/templates/top';
 
 console.log('This page is parent.');

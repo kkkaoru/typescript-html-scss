@@ -1,0 +1,1 @@
+export type SupportedLocale = 'ja' | 'en';

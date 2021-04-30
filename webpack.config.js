@@ -80,13 +80,12 @@ module.exports = {
             preprocessor:(content, loaderContext) =>{
               // Can be reactivity when hot reload
               const includeFiles = content.match(/(?<=\<include\s*src=\").*(?=\")/g);
-              if ( includeFiles === null) {
-                return;
+              if (includeFiles !== null) {
+                [...new Set(includeFiles)].forEach((includedFileName)=>{
+                  // https://webpack.js.org/api/loaders/#thisadddependency
+                  loaderContext.dependency(`${__dirname}/src/${includedFileName}`);
+                });
               }
-              [...new Set(includeFiles)].forEach((includedFileName)=>{
-                // https://webpack.js.org/api/loaders/#thisadddependency
-                loaderContext.dependency(`${__dirname}/src/${includedFileName}`);
-              });
               try {
                 return posthtml([include({ encoding: 'utf8', root: './src' })]).process(content, {sync: true,}).html;
               } catch(error){

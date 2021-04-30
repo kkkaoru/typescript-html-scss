@@ -78,8 +78,10 @@ module.exports = {
           loader: 'html-loader',
           options: {
             preprocessor:(content, loaderContext) =>{
+              const includeSrcPattern = /(?<=\<include\s*src=\").*(?=\")/g;
+              const htmlTrimmedPrefixSigns = content.replace(includeSrcPattern, (replacement)=> replacement.replace(/^(~|@)\//, ''));
               // Can be reactivity when hot reload
-              const includeFiles = content.match(/(?<=\<include\s*src=\").*(?=\")/g);
+              const includeFiles = content.match(htmlTrimmedPrefixSigns);
               if (includeFiles !== null) {
                 [...new Set(includeFiles)].forEach((includedFileName)=>{
                   // https://webpack.js.org/api/loaders/#thisadddependency
@@ -87,7 +89,7 @@ module.exports = {
                 });
               }
               try {
-                return posthtml([include({ encoding: 'utf8', root: './src' })]).process(content, {sync: true,}).html;
+                return posthtml([include({ encoding: 'utf8', root: './src' })]).process(htmlTrimmedPrefixSigns, {sync: true,}).html;
               } catch(error){
                 loaderContext.emitError(error);
                 return content;

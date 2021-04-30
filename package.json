@@ -1,10 +1,11 @@
 {
-  "name": "carousel",
+  "name": "typescript-html-scss",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "engines": {
-    "node": "16.x"
+    "node": "^16.0.0",
+    "npm": "^7.10.0"
   },
   "scripts": {
     "dev": "webpack serve",
@@ -16,15 +17,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/kkkaoru/carousel.git"
+    "url": "git+ssh://git@github.com/kkkaoru/typescript-html-scss.git"
   },
   "keywords": [],
   "author": "https://github.com/kkkaoru/",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/kkkaoru/carousel/issues"
+    "url": "https://github.com/kkkaoru/typescript-html-scss/issues"
   },
-  "homepage": "https://github.com/kkkaoru/carousel#readme",
+  "homepage": "https://github.com/kkkaoru/typescript-html-scss#readme",
   "devDependencies": {
     "css-loader": "^5.2.4",
     "html-loader": "^2.1.2",

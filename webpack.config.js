@@ -78,6 +78,15 @@ module.exports = {
           loader: 'html-loader',
           options: {
             preprocessor:(content, loaderContext) =>{
+              // Can be reactivity when hot reload
+              const includeFiles = content.match(/(?<=\<include\s*src=\").*(?=\")/g);
+              if ( includeFiles === null) {
+                return;
+              }
+              [...new Set(includeFiles)].forEach((includedFileName)=>{
+                // https://webpack.js.org/api/loaders/#thisadddependency
+                loaderContext.dependency(`${__dirname}/src/${includedFileName}`);
+              });
               try {
                 return posthtml([include({ encoding: 'utf8', root: './src' })]).process(content, {sync: true,}).html;
               } catch(error){

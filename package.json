@@ -26,6 +26,7 @@
     "watch:prettier": "chokidar '*.{js,json}' '**/*.{js,ts,html,scss}' -c 'npx prettier -cw {path}'",
     "watch:htmlhint": "chokidar '**/*.html' -c 'npx htmlhint {path}'",
     "lint-staged": "lint-staged",
+    "lint": "npm-run-all eslint stylelint htmlhint prettier",
     "test": "npm-run-all tsc"
   },
   "repository": {

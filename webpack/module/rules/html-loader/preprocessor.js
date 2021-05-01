@@ -1,8 +1,8 @@
 const processPostHtml = require('./posthtml');
 
 /**
- * 
- * @param {string} content 
+ *
+ * @param {string} content
  * @param {Object} loaderContext
  * @param {(filePath: string) => void} loaderContext.dependency
  * @param {(error: unknown) => void} loaderContext.emitError
@@ -10,11 +10,11 @@ const processPostHtml = require('./posthtml');
  */
 function htmlLoaderPreprocessor(content, loaderContext) {
   try {
-    const {html, files} = processPostHtml(content, './src');
-    files.forEach((filePath)=>{
+    const { html, files } = processPostHtml(content, './src');
+    files.forEach((filePath) => {
       // https://webpack.js.org/api/loaders/#thisadddependency
       loaderContext.dependency(filePath);
-    })
+    });
     return html;
   } catch (error) {
     loaderContext.emitError(error);

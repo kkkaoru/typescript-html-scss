@@ -1,6 +1,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const htmlLoaderPreprocessor = require('./webpack/html-loader/preprocessor');
+const rules = require('./webpack/module/rules');
+
 /** @type import('webpack').Configuration */
 module.exports = {
   mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
@@ -48,43 +49,7 @@ module.exports = {
   ],
   watch: process.env.NODE_ENV === 'production',
   module: {
-    rules: [
-      {
-        test: /\.ts$/,
-        use: [
-          {
-            loader: 'ts-loader',
-            options: { allowTsInNodeModules: true },
-          },
-        ],
-      },
-      {
-        test: /\.scss$/,
-        use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-          },
-          // Translates CSS into CommonJS
-          'css-loader',
-          // Compiles Sass to CSS
-          {
-            loader: 'sass-loader',
-            options: {
-              sourceMap: process.env.NODE_ENV === 'production',
-            },
-          },
-        ],
-      },
-      {
-        test: /\.html$/i,
-        use: {
-          loader: 'html-loader',
-          options: {
-            preprocessor: htmlLoaderPreprocessor,
-          },
-        },
-      },
-    ],
+    rules,
   },
   resolve: {
     alias: {

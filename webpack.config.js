@@ -1,9 +1,9 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const htmlLoaderPreprocessor = require('./webpack/html-loader/preprocessor');
 /** @type import('webpack').Configuration */
 module.exports = {
-  mode: process.env.NODE_ENV === 'production' ? 'production': 'development',
+  mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
   devtool: process.env.NODE_ENV === 'production' ? undefined : 'inline-source-map',
   entry: {
     global: `${__dirname}/src/globals/global.ts`,
@@ -11,11 +11,11 @@ module.exports = {
     child: `${__dirname}/src/pages/child/index.ts`,
   },
   output: {
-    path: `${__dirname}/dist`
+    path: `${__dirname}/dist`,
   },
   devServer: {
     hot: true,
-    port: process.env.PORT ? Number(process.env.PORT) : 8888, 
+    port: process.env.PORT ? Number(process.env.PORT) : 8888,
     contentBase: `${__dirname}/src`,
     watchContentBase: true,
   },
@@ -25,10 +25,10 @@ module.exports = {
         vendors: {
           test: /[\\/]node_modules[\\/]/,
           name: 'vendors',
-          chunks: 'all'
+          chunks: 'all',
         },
-      }
-    }
+      },
+    },
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -51,10 +51,12 @@ module.exports = {
     rules: [
       {
         test: /\.ts$/,
-        use: [{
-          loader: 'ts-loader',
-          options: { allowTsInNodeModules: true, }
-        }],
+        use: [
+          {
+            loader: 'ts-loader',
+            options: { allowTsInNodeModules: true },
+          },
+        ],
       },
       {
         test: /\.scss$/,
@@ -63,15 +65,15 @@ module.exports = {
             loader: MiniCssExtractPlugin.loader,
           },
           // Translates CSS into CommonJS
-          "css-loader",
+          'css-loader',
           // Compiles Sass to CSS
           {
-            loader: "sass-loader",
+            loader: 'sass-loader',
             options: {
               sourceMap: process.env.NODE_ENV === 'production',
             },
-          }
-        ]
+          },
+        ],
       },
       {
         test: /\.html$/i,
@@ -79,18 +81,16 @@ module.exports = {
           loader: 'html-loader',
           options: {
             preprocessor: htmlLoaderPreprocessor,
-          }
+          },
         },
       },
-    ]
+    ],
   },
   resolve: {
     alias: {
       '@': `${__dirname}/src`,
       '~': `${__dirname}/src`,
     },
-    extensions: [
-      '.ts','.js',
-    ]
-  }
+    extensions: ['.ts', '.js'],
+  },
 };

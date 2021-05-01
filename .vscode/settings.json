@@ -3,7 +3,5 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnPaste": true,
   "editor.formatOnType": true,
-  "editor.codeActionsOnSave": [
-    "source.fixAll.eslint"
-  ]
+  "editor.codeActionsOnSave": ["source.fixAll.eslint", "source.fixAll.stylelint"]
 }

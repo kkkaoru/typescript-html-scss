@@ -1,3 +1,8 @@
 {
-  "recommendations": ["esbenp.prettier-vscode", "dbaeumer.vscode-eslint", "mkaufman.htmlhint"]
+  "recommendations": [
+    "esbenp.prettier-vscode",
+    "dbaeumer.vscode-eslint",
+    "mkaufman.htmlhint",
+    "stylelint.vscode-stylelint"
+  ]
 }

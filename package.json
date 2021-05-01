@@ -8,13 +8,16 @@
     "npm": "^7.10.0"
   },
   "scripts": {
-    "dev": "webpack serve",
+    "dev": "npm-run-all -p serve watch",
+    "serve" :"webpack serve",
     "build": "webpack && touch ./dist/.gitkeep",
     "clean": "rm -fr ./dist && mkdir dist && touch ./dist/.gitkeep",
     "rebuild": "npm run clean && npm run build",
     "analyze": "webpack --profile --json > stats.json && webpack-bundle-analyzer stats.json",
     "prettier": "prettier -cw *.{js,json} **/*.{js,ts,html,scss}",
     "tsc": "tsc --noEmit",
+    "watch": "npm-run-all -p watch:*",
+    "watch:prettier": "chokidar '*.{js,json}' '**/*.{js,ts,html,scss}' -c 'npx prettier -cw {path}'",
     "lint-staged": "lint-staged",
     "test": "npm-run-all tsc"
   },
@@ -31,6 +34,7 @@
   "homepage": "https://github.com/kkkaoru/typescript-html-scss#readme",
   "devDependencies": {
     "@types/prettier": "^2.2.3",
+    "chokidar-cli": "^2.1.0",
     "css-loader": "^5.2.4",
     "html-loader": "^2.1.2",
     "html-webpack-plugin": "^5.3.1",

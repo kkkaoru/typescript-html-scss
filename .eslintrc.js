@@ -1,6 +1,6 @@
 /** @type import('eslint').Linter.BaseConfig */
 module.exports = {
-  extends: ['eslint-config-airbnb-base', 'plugin:@typescript-eslint/recommended', 'prettier'],
+  extends: ['eslint-config-airbnb-base', 'plugin:@typescript-eslint/recommended', 'plugin:jest/all', 'prettier'],
   env: {
     browser: true,
     node: true,
@@ -18,5 +18,6 @@ module.exports = {
         ts: 'off',
       },
     ],
+    'jest/prefer-expect-assertions': ['error', { onlyFunctionsWithAsyncKeyword: true }],
   },
 };

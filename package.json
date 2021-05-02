@@ -25,6 +25,7 @@
     "watch:stylelint": "chokidar '**/*.{scss}' -c 'npx stylelint --fix {path}'",
     "watch:prettier": "chokidar '*.{js,json}' '**/*.{js,ts,html,scss}' -c 'npx prettier -cw {path}'",
     "watch:htmlhint": "chokidar '**/*.html' -c 'npx htmlhint {path}'",
+    "watch:test": "chokidar '**/*.test.ts' -c 'npx jest {path}'",
     "lint-staged": "lint-staged",
     "jest": "jest",
     "lint": "npm-run-all eslint stylelint htmlhint prettier",

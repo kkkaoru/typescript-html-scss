@@ -19,5 +19,11 @@ module.exports = {
       },
     ],
     'jest/prefer-expect-assertions': ['error', { onlyFunctionsWithAsyncKeyword: true }],
+    'import/no-extraneous-dependencies': [
+      'error',
+      {
+        devDependencies: ['./src/**/*.test.ts'],
+      },
+    ],
   },
 };

@@ -7,7 +7,7 @@ import { SupportedLocale } from '@/types/locale';
 import { insertDateTimeText } from './element';
 
 export function animateUpdateDateTimeText(
-  elements: NodeListOf<HTMLElement>,
+  elements: NodeListOf<Element>,
   localeCode: SupportedLocale,
   dayjsLocale: ILocale,
 ): void {
@@ -19,17 +19,11 @@ export function animateUpdateDateTimeText(
 }
 
 export async function updateDateTimeTextByAnimation(
-  dateTimeElements: NodeListOf<HTMLElement>,
+  dateTimeElements: NodeListOf<Element>,
   navigatorLanguageCode = 'ja',
-  animationFunction: (elements: NodeListOf<HTMLElement>, localeCode: SupportedLocale, dayjsLocale: ILocale) => void,
+  animationFunction: (elements: NodeListOf<Element>, localeCode: SupportedLocale, dayjsLocale: ILocale) => void,
 ): Promise<void> {
   const supportedLocaleCode = findSupportedLocaleCodeByLangCode(navigatorLanguageCode);
   const dayjsLocale = await findSupportedDayjsLocale(supportedLocaleCode);
   animationFunction(dateTimeElements, supportedLocaleCode, dayjsLocale);
 }
-
-updateDateTimeTextByAnimation(
-  document.querySelectorAll('.datetime'),
-  window.navigator.language,
-  animateUpdateDateTimeText,
-);
